@@ -24,6 +24,7 @@ namespace BabyStore
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/myTemplate.css",
                       "~/Content/site.css"));
         }
     }

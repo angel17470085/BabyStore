@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Categorias</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create",null, new {@class="btn btn-primary btn btn-sm"})
 </p>
-<table class="table">
+<table class="table table-striped table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -20,13 +20,14 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.ActionLink(item.Name, "Index", "Products", new { category = item.Name }, null)
+        <td class="active">
+            @Html.ActionLink(item.Name, "Index", "Products", new { category = item.Name }, new {@class= "text-info" })
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID },new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Details", "Details", new { id = item.ID }, new {@class= "btn btn-info btn-sm" } )
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+            
         </td>
     </tr>
 }

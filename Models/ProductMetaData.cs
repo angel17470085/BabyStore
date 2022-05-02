@@ -14,6 +14,12 @@ namespace BabyStore.Models
     {
         [Display(Name="Producto")]
         public string Name { get; set; }
+
+        [Display(Name="Descripcion")]
+        public string Description { get; set; }
+
+        [Display(Name = "Precio")]
+        public decimal Price { get; set; }
     }
 
 }

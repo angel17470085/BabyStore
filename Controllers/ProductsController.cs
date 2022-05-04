@@ -149,6 +149,8 @@ namespace BabyStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();

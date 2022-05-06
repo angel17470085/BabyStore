@@ -180,6 +180,14 @@
     <Compile Include="Migrations\202205040506452_InitialDatabase.Designer.cs">
       <DependentUpon>202205040506452_InitialDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205060308206_CategoryNameValidation.cs" />
+    <Compile Include="Migrations\202205060308206_CategoryNameValidation.Designer.cs">
+      <DependentUpon>202205060308206_CategoryNameValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205060344389_ProductValidation.cs" />
+    <Compile Include="Migrations\202205060344389_ProductValidation.Designer.cs">
+      <DependentUpon>202205060344389_ProductValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -281,6 +289,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202205040506452_InitialDatabase.resx">
       <DependentUpon>202205040506452_InitialDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205060308206_CategoryNameValidation.resx">
+      <DependentUpon>202205060308206_CategoryNameValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205060344389_ProductValidation.resx">
+      <DependentUpon>202205060344389_ProductValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

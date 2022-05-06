@@ -30,11 +30,11 @@
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="index"?"active":"")">
                              @Html.ActionLink("Comprar por categoria", "Index", "Categories", new { area =""}, new { })
                         </li>
-                        <li>@Html.ActionLink("Ver todos los productos", "Index", "Products")</li>
+                        <li>@Html.RouteLink("Ver todos los productos", "ProductsIndex")</li>
 
 
                     </ul>
-                    @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                     {
                         <div class="form-group">
                             @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Buscar Productos" })

@@ -1,4 +1,5 @@
 ﻿@model BabyStore.ViewModels.ProductIndexViewModel
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -6,13 +7,22 @@
 
 <h2>Productos</h2>
 
+<p class="text-info">
+     @(String.IsNullOrWhiteSpace(Model.Search) ? "Mostrando" : "Usted busco " + Model.Search + " Encontrados") <span class="badge">@Model.Products.TotalItemCount</span>producto(s)
+</p>
+
 <p>
-    @*@Html.ActionLink("Create New", "Create")*@
+  
     @Html.ActionLink("Create new", "Create",null, new { @class = "btn btn-primary btn btn-sm" })
-    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+
+    @using (Html.BeginRouteForm("ProductsIndex",FormMethod.Get))
     {
-        <label>Filter by category:</label>
+        <label>Filtrar por categoria:</label>
         @Html.DropDownListFor(vm => vm.Category, Model.CatFilterItems, "All")
+        <label>Ordenar por:</label>
+        @Html.DropDownListFor(vm => vm.SortBy, new SelectList(Model.Sorts, "Value", "Key"), "Default")
+
+
         <input class="btn btn-info btn-sm" type="submit" value="Filtrar" /> @*manda un search al url y este Filtra *@
 
         <input type="hidden" name="Search" id="Search" value="@Model.Search" />
@@ -58,3 +68,15 @@
 }
 
 </table>
+
+<div>
+    Page @(Model.Products.PageCount < Model.Products.PageNumber ? 0 : Model.Products.PageNumber) of @Model.Products.PageCount
+    @Html.PagedListPager(Model.Products, page => Url.Action("Index",
+    new
+    {
+        category = @Model.Category,
+        Search = @Model.Search,
+        sortBy = @Model.SortBy,
+        page
+    }))
+</div>

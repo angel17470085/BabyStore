@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using BabyStore.DAL;
 using BabyStore.Models;
 using BabyStore.ViewModels;
-
+using PagedList;
 namespace BabyStore.Controllers
 {
     public class ProductsController : Controller
@@ -17,7 +17,7 @@ namespace BabyStore.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Products
-        public ActionResult Index(string category, string search)
+        public ActionResult Index(string category, string search, string sortBy, int? page)
         {
             //Instantiate a new vied model
             ProductIndexViewModel viewModel = new ProductIndexViewModel();
@@ -50,9 +50,36 @@ namespace BabyStore.Controllers
             if (!String.IsNullOrEmpty(category))
             {
                 products = products.Where(p => p.Category.Name == category);
+                viewModel.Category = category;
             }
+            //sort the results
+          
 
-            viewModel.Products = products;
+            switch (sortBy)
+            {
+
+                case "price_lowest":
+                    products = products.OrderBy(p => p.Price);
+                    break;
+                case "price_highest":
+                    products = products.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.Name);
+                    break;
+            }
+            //Establishing values for pagination
+            const int PageItems = 3;
+            int currentPage = (page ?? 1);
+            viewModel.Products = products.ToPagedList(currentPage, PageItems);
+            viewModel.SortBy = sortBy;
+
+            viewModel.Sorts = new Dictionary<string, string>
+            {
+                {"Precios bajos a altos", "price_lowest"},
+                { "precios altos a bajos", "price_highest"}
+            };
+
             return View(viewModel);
         }
 
@@ -68,6 +95,8 @@ namespace BabyStore.Controllers
             {
                 return HttpNotFound();
             }
+
+
             return View(product);
         }
 

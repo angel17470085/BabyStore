@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using BabyStore.DAL;
 using BabyStore.Models;
 using System.Web.Helpers;
-
+using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 namespace BabyStore.Controllers
@@ -57,6 +57,7 @@ namespace BabyStore.Controllers
         {
             bool allValid = true;
             string inValidFiles = "";
+            db.Database.Log = sql => Trace.WriteLine(sql);
             //check the user has entered a file
             if (files[0] != null)
             {
@@ -127,6 +128,7 @@ namespace BabyStore.Controllers
                         {
                             duplicateFiles += ", " + file.FileName;
                             duplicates = true;
+                            db.Entry(productToAdd).State = EntityState.Detached;
                         }
                         else
                         {

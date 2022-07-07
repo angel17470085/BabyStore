@@ -30,6 +30,7 @@
 </p>
 <table class="table table-striped table-hover">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Category)
         </th>
@@ -46,23 +47,31 @@
     </tr>
 
 @foreach (var item in Model.Products) {
-    <tr>
+<tr>
+    <td>
+        @if (item.ProductImageMappings != null && item.ProductImageMappings.Any())
+        {
+            <a href="@Url.Action("Details", new { id = item.ID})">
+                <img src="@(Url.Content(Constants.ProductImagePath) + item.ProductImageMappings.OrderBy(pim => pim.ImageNumber).ElementAt(0).ProductImage.FileName)">
+            </a>
+        }
+    </td>
         <td class="active">
             @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
-        <td class="active" >
+        <td class="active">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td class="active" >
+        <td class="active">
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td class="active"  >
+        <td class="active">
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }, new {@class= "btn btn-default btn-sm" })
-            @Html.ActionLink("Details", "Details", new { id=item.ID },new { @class = "btn btn-info btn-sm" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-danger btn-sm" })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
         </td>
     </tr>
 }

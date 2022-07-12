@@ -29,8 +29,12 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Comprar por categoria", "Index", "Categories")</li>
                     <li>@Html.RouteLink("Ver todos los productos", "ProductsIndex")</li>
-                    <li>@Html.ActionLink("Gestionar Imagenes", "Index", "ProductImages")</li>
-                   
+                    
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                    }
                 </ul>
 
                 @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get, new { @class = "navbar-form navbar-left" }))

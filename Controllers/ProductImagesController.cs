@@ -14,20 +14,17 @@ using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 namespace BabyStore.Controllers
 {
+    
     public class ProductImagesController : Controller
     {
         private StoreContext db = new StoreContext();
 
-        #region INDEX
         // GET: ProductImages
         public ActionResult Index()
         {
             return View(db.ProductImages.ToList());
         }
 
-
-
-        #endregion
 
         public ActionResult Upload()
         {
@@ -140,10 +137,7 @@ namespace BabyStore.Controllers
 
          }
 
-
-         #region CRUD
         
-
         // GET: ProductImages/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -189,6 +183,7 @@ namespace BabyStore.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -197,6 +192,7 @@ namespace BabyStore.Controllers
             }
             base.Dispose(disposing);
         }
+
 
         private bool ValidateFile(HttpPostedFileBase file)
         {
@@ -209,6 +205,7 @@ namespace BabyStore.Controllers
             }
             return false;
         }
+
 
         private void SaveFileToDisk(HttpPostedFileBase file)
         {
@@ -224,7 +221,7 @@ namespace BabyStore.Controllers
             }
             img.Save(Constants.ProductThumbnailPath + file.FileName);
         }
-        #endregion
+       
 
 
     }

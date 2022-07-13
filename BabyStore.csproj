@@ -187,32 +187,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205040506452_InitialDatabase.cs" />
-    <Compile Include="Migrations\202205040506452_InitialDatabase.Designer.cs">
-      <DependentUpon>202205040506452_InitialDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202207080327367_InitialCreate.cs" />
+    <Compile Include="Migrations\202207080327367_InitialCreate.Designer.cs">
+      <DependentUpon>202207080327367_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205060308206_CategoryNameValidation.cs" />
-    <Compile Include="Migrations\202205060308206_CategoryNameValidation.Designer.cs">
-      <DependentUpon>202205060308206_CategoryNameValidation.cs</DependentUpon>
+    <Compile Include="Migrations\202207132050145_twocontextreset.cs" />
+    <Compile Include="Migrations\202207132050145_twocontextreset.Designer.cs">
+      <DependentUpon>202207132050145_twocontextreset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205060344389_ProductValidation.cs" />
-    <Compile Include="Migrations\202205060344389_ProductValidation.Designer.cs">
-      <DependentUpon>202205060344389_ProductValidation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202205070238431_ProductImages.cs" />
-    <Compile Include="Migrations\202205070238431_ProductImages.Designer.cs">
-      <DependentUpon>202205070238431_ProductImages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202205070500366_UniqueFileName.cs" />
-    <Compile Include="Migrations\202205070500366_UniqueFileName.Designer.cs">
-      <DependentUpon>202205070500366_UniqueFileName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206260235236_CreateProductImageMappings.cs" />
-    <Compile Include="Migrations\202206260235236_CreateProductImageMappings.Designer.cs">
-      <DependentUpon>202206260235236_CreateProductImageMappings.cs</DependentUpon>
+    <Compile Include="Migrations\202207132111062_update_user_fields.cs" />
+    <Compile Include="Migrations\202207132111062_update_user_fields.Designer.cs">
+      <DependentUpon>202207132111062_update_user_fields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\StoreConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -415,23 +405,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205040506452_InitialDatabase.resx">
-      <DependentUpon>202205040506452_InitialDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207080327367_InitialCreate.resx">
+      <DependentUpon>202207080327367_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205060308206_CategoryNameValidation.resx">
-      <DependentUpon>202205060308206_CategoryNameValidation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207132050145_twocontextreset.resx">
+      <DependentUpon>202207132050145_twocontextreset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205060344389_ProductValidation.resx">
-      <DependentUpon>202205060344389_ProductValidation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205070238431_ProductImages.resx">
-      <DependentUpon>202205070238431_ProductImages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205070500366_UniqueFileName.resx">
-      <DependentUpon>202205070500366_UniqueFileName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206260235236_CreateProductImageMappings.resx">
-      <DependentUpon>202206260235236_CreateProductImageMappings.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207132111062_update_user_fields.resx">
+      <DependentUpon>202207132111062_update_user_fields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

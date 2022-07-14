@@ -13,10 +13,16 @@ namespace BabyStore.Models
         public string AddressLine1 { get; set; }
         [Display(Name = "Direccion 2")]
         public string AddressLine2 { get; set; }
+
         [Required]
+        [Display(Name ="Colonia")]
         public string Town { get; set; }
+
         [Required]
+        [Display(Name ="Municipio")]
         public string County { get; set; }
+
+        [Display(Name ="Codigo Postal")]
         [Required]
         public string Postcode { get; set; }
     }

@@ -1,0 +1,57 @@
+﻿@model BabyStore.Models.ApplicationUser
+@{
+    ViewBag.Title = "Detalles de Usuario";
+}
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        @Html.DisplayFor(model => model.Address)
+    </dl>
+</div>
+<div class="container">
+    <div class="row">
+        <h3>Roles al cual pertenece este usuario:</h3>
+    </div>
+    @if (ViewBag.RoleNames.Count == 0)
+    {
+        <hr />
+        <p>No se encontraron roles para este usuario</p>
+    }
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <div class="row">
+            @item
+        </div>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

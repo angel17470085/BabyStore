@@ -154,7 +154,16 @@ namespace BabyStore
                 user = new ApplicationUser
                 {
                     UserName = name,
-                    Email = name
+                    Email = name,
+                    FirstName = "Admin",
+                    LastName = "Admin",
+                    DateOfBirth = new DateTime(2022,1,23),
+                    Address = new Address { 
+                    AddressLine1 = "San francisco Camp",
+                    Town = "Amp. Josefa Ortiz",
+                    County ="Campeche",
+                    Postcode="24080"
+                    }
                 };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
@@ -165,6 +174,15 @@ namespace BabyStore
             {
                 var result = userManager.AddToRole(user.Id, role.Name);
             }
+            //Create users role
+            const string userRoleName = "Users";
+            role = roleManager.FindByName(userRoleName);
+            if (role == null)
+            {
+                role = new IdentityRole(userRoleName);
+                var roleresult = roleManager.Create(role);
+            }
+
         }
     }
 

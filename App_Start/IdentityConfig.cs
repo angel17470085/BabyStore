@@ -11,15 +11,39 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using BabyStore.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System.Diagnostics;
 
 namespace BabyStore
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync(message);
+        }
+        private async Task configSendGridasync(IdentityMessage message)
+        {
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("bubulubu001@gmail.com", "Angel");
+            var subject = message.Subject;
+            var to = new EmailAddress(message.Destination);
+            var plainTextContent = message.Body;
+            var htmlContent = message.Body;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+
+            // Send the email.
+            if (client != null)
+            {
+                await client.SendEmailAsync(msg);
+            }
+            else
+            {
+                Trace.TraceError("Failed to create Web transport.");
+                await Task.FromResult(0);
+            }
         }
     }
 
@@ -54,10 +78,10 @@ namespace BabyStore
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults
@@ -110,15 +134,12 @@ namespace BabyStore
 
     public class ApplicationRoleManager : RoleManager<IdentityRole>
     {
-        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
-        : base(roleStore)
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore) : base(roleStore)
         {
         }
-        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager>
-        options, IOwinContext context)
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager>options, IOwinContext context)
         {
-            return new ApplicationRoleManager(new
-            RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+            return new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
         }
     }
 

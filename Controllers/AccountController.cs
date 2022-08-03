@@ -81,6 +81,7 @@ namespace BabyStore.Controllers
                 {
                     string calbackUrl = await SendEmailConfirmationTokenAsync(user.Id,"Confirm your Account - Resend");
                     ViewBag.errorMessage = "You must have a confirmed email to log on.";
+                    TempData["confirmMessage"] = string.Format("Check your Email and confirm your Account, you must be confirmed before you can log in.");
                     return View("Error");
                 }
             }
@@ -150,8 +151,9 @@ namespace BabyStore.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -160,7 +162,7 @@ namespace BabyStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -188,12 +190,14 @@ namespace BabyStore.Controllers
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
                     // Uncomment to debug locally 
                     // TempData["ViewBagLink"] = callbackUrl;
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                    + "before you can log in.";
-
-                    return View("Info");
+                    //ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    //                + "before you can log in.";
+                    TempData["confirmMessage"] = string.Format("Check your Email and confirm your Account, you must be confirmed before you can log in.");
+                    //return View("Info");
                     //return RedirectToAction("Index", "Home");
+                    return RedirectToLocal(returnUrl);
                 }
+                ViewBag.ReturnUrl = returnUrl;
                 AddErrors(result);
             }
 

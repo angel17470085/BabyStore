@@ -4,12 +4,17 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
+<h1 class="text-info">Ocurrio un Error</h1>
 
 @{
     if (String.IsNullOrEmpty(ViewBag.errorMessage))
     {
-        <h2 class="text-danger">An error occurred while processing your request.</h2>
+        if (TempData["confirmMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["confirmMessage"]</div>
+        }
+        <h2 class="text-warning">An error occurred while processing your request.</h2>
+
     }
     else
     {
